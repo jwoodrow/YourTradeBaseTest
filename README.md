@@ -12,13 +12,7 @@ or
 
 ```bash
 > cd YourTradeBaseTest
-```
-
-```bash
 > bundle install
-```
-
-```bash
 > rspec spec
 ```
 
@@ -47,13 +41,7 @@ with your ruby path:
 
 ```bash
 > chmod +x list_people_at_100km_or_less.rb average_value_at_200km_or_less.rb
-```
-
-```bash
 > ./list_people_at_100km_or_less.rb path_to_json_file
-```
-
-```bash
 > ./average_value_at_200km_or_less.rb path_to_json_file
 ```
 
@@ -61,8 +49,5 @@ with your ruby path:
 
 ```bash
 > ruby list_people_at_100km_or_less.rb path_to_json_file
-```
-
-```bash
 > ruby average_value_at_200km_or_less.rb path_to_json_file
 ```
