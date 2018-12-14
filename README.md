@@ -1,4 +1,8 @@
 # YourTradeBase Technical Test
+## Requirements
+
+- Ruby 2.5.3
+
 ## How to run tests
 ```bash
 > git clone git@github.com:jwoodrow/YourTradeBaseTest.git
