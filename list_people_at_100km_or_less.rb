@@ -47,7 +47,7 @@ origin_latitude = 51.450167
 origin_longitude = -2.594678
 
 filtered_people = people.select do |person|
-  person.distance_from(origin_latitude, origin_longitude) <= max_distance && person.country.downcase == "england"
+  person.valid? && person.distance_from(origin_latitude, origin_longitude) <= max_distance && person.country.downcase == "england"
 end.sort_by { |person| person.value }.reverse
 
 puts filtered_people.map { |person| person.to_hash }.to_json
