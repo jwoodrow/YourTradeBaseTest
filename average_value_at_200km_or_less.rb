@@ -47,7 +47,7 @@ origin_latitude = 51.450167
 origin_longitude = -2.594678
 
 filtered_people = people.select do |person|
-  person.distance_from(origin_latitude, origin_longitude) < max_distance
+  person.distance_from(origin_latitude, origin_longitude) <= max_distance
 end
 
 # We wouldn't want to be dividing by zero
