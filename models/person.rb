@@ -54,6 +54,16 @@ class Person
     "#{name[:first]} #{name[:last]}"
   end
 
+  def fullname=(fullname)
+    split_name = fullname.split(" ")
+    @name = {
+      first: split_name[0],
+      last: split_name[1]
+    }
+    # Returning the new fullname for chaining
+    fullname()
+  end
+
   def distance_from(latitude, longitude)
     # The haversine formula: d = R * c
     # Where: 

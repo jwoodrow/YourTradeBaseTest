@@ -127,13 +127,51 @@ RSpec.describe Person, "#validators" do
 	end
 end
 
-RSpec.describe Person, "#calculations" do
-	context "Can calculate distance between itself" do 
+RSpec.describe Person, "#methods" do
+	before {
+		@person = Person.new "156asdasd", 42, {"first" => "John", "last" => "Doe"}, {"latitude" => "51.077801", "longitude" => "-3.082931"}, "company_name", "local@domain.tld", "423 Auburn Place, Sanders, Texas, 5269", "England"
+	}
+	context "distance_from itself" do 
 		it "and Bristol" do
-			@person = Person.new "156asdasd", 42, {"first" => "John", "last" => "Doe"}, {"latitude" => "51.077801", "longitude" => "-3.082931"}, "company_name", "local@domain.tld", "423 Auburn Place, Sanders, Texas, 5269", "England"
-			@bristol_latitude = 51.450167
-			@bristol_longitude = -2.594678
-			expect(@person.distance_from(@bristol_latitude, @bristol_longitude)).to eq 53.55791130847151
+			bristol_latitude = 51.450167
+			bristol_longitude = -2.594678
+			expect(@person.distance_from(bristol_latitude, bristol_longitude)).to eq 53.55791130847151
+		end
+	end
+	context "fullname" do
+		it "should return John Doe" do
+			expect(@person.fullname).to eq "John Doe"
+		end
+		it "should modify the name when set" do
+			@person.fullname = "Jane Doe"
+			expect(@person.name[:first]).to eq "Jane"
+			expect(@person.name[:last]).to eq "Doe"
+		end
+	end
+	context "to_hash" do
+		it "should return the correct hash when unmodified" do
+			person_hash = @person.to_hash
+			expect(person_hash[:id]).to eq "156asdasd"
+			expect(person_hash[:fullname]).to eq "John Doe"
+			expect(person_hash[:value]).to eq 42
+			expect(person_hash[:email]).to eq "local@domain.tld"
+		end
+		it "should return the correct hash when modified" do
+			@person.fullname = "Jane Doe"
+			person_hash = @person.to_hash
+			expect(person_hash[:id]).to eq "156asdasd"
+			expect(person_hash[:fullname]).to eq "Jane Doe"
+			expect(person_hash[:value]).to eq 42
+			expect(person_hash[:email]).to eq "local@domain.tld"
+		end
+	end
+	context "to_json" do
+		it "should return the correct json when unmodified" do
+			expect(@person.to_json).to eq "{\"id\":\"156asdasd\",\"fullname\":\"John Doe\",\"value\":42,\"email\":\"local@domain.tld\"}"
+		end
+		it "should return the correct json when modified" do
+			@person.fullname = "Jane Doe"
+			expect(@person.to_json).to eq "{\"id\":\"156asdasd\",\"fullname\":\"Jane Doe\",\"value\":42,\"email\":\"local@domain.tld\"}"
 		end
 	end
 end
